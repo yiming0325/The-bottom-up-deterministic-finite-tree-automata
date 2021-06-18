@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*
 import argparse
+from Stack import Stack
+from simple_form  import simple_form
+from print_tree import print_tree
+from print_process import print_process
+import copy
 
 
 class TreeAutomaton:
@@ -21,9 +27,6 @@ def read(finalsymbols, productions):
     p = {} #P
     for line in lines(open(productions)):
         tmp = line.split("->")
-        #print(tmp)
-        #print("tmp[0]",tmp[0].strip())
-        #print("tmp[1]",tmp[1].strip())
 
         #F
         for char in tmp[0].strip():
@@ -45,10 +48,6 @@ def read(finalsymbols, productions):
     for line in lines(open(finalsymbols)):
         qf.append(line.strip())
 
-    #print (p)
-    #print (qf)
-    #print (q)
-    #print (f)
     return q, qf, f, p
 
 
@@ -58,7 +57,6 @@ arg_par.add_argument('-f', '--finalsymbols', dest='finals', help='finalsymbols',
 arg_par.add_argument('-p', '--productions', dest='prods', help='productions', required='True')
 argse = arg_par.parse_args()
 
-#read(argse.finals, argse.prods)
 q, qf, f, p = read(argse.finals, argse.prods)
 
 print ("p----",p)
@@ -69,58 +67,57 @@ print ("f----",f)
 t_a = TreeAutomaton(q, qf, f, p)
 
 
+
 # B( A( C(0, 1) ), C( 1, A(0) ) 
 input_string = "B(A(C(0,1)),C(1,A(0)))"
-
-class Stack(object):
-    def __init__(self):
-        self.items = []
-
-    def is_empty(self):
-        return self.items == []
-
-    def peek(self):
-        return self.items[len(self.items) - 1]
-
-    def size(self):
-        return len(self.items)
-
-    def push(self, item):
-        self.items.append(item)
-
-    def pop(self):
-        return self.items.pop()
+#input_string = "B(A(C(01,1)),C(1,A(01)))"
 
 
+# change the leaf node
 tmp_string = ""
+item = ""
 for char in input_string:
-    if char in t_a.P.keys():
-        tmp_string += t_a.P[char]
-        continue
-    tmp_string += char
+    if char not in [')',"(",',']:
+        item = item + char
+    else:
+        if item in t_a.P.keys():
+            tmp_string = tmp_string + t_a.P[item] + char
+            item = ""
+        else:
+            tmp_string = tmp_string + item + char
+            item = ""
 
 print (tmp_string)
 
+simple_string, simple_pattern = simple_form(tmp_string)
 
+print ("simple_string:", simple_string)
+print ("simple_pattern:", simple_pattern)
+
+print_tree(simple_string,simple_pattern)
+
+# judge whether the input tree is accepted
 stack = Stack()
-count_left = 0
 
-for char in tmp_string:
+for char in simple_string:
     if(char == '('):
-        print(1)
         stack.push('(')
     elif(char == ')'):
-        print(2)
         cur_string = ""
         cur_string += ')'
         while(stack.peek()!='('):
-            cur_string = stack.pop() + cur_string
+            if(stack.peek()==','):
+                cur_string = stack.pop() + cur_string
+            else:
+                cur_string = simple_pattern[int(stack.pop())] + cur_string
         cur_string = stack.pop() + cur_string
-        cur_string = stack.pop() + cur_string
+        cur_string = simple_pattern[int(stack.pop())] + cur_string
         if cur_string in t_a.P.keys():
-            print("*****",cur_string)
-            for i in t_a.P[cur_string]:
-                stack.push(i)
+            for key,value in simple_pattern.items():
+                if(value == t_a.P[cur_string]):
+                    stack.push(str(key))
+                    break
+            
     else:
         print(3)
         stack.push(char)
@@ -128,5 +125,11 @@ for char in tmp_string:
 res = ""
 while not stack.is_empty():
     res = stack.pop() + res
-
-print (res)
+if res != "":
+    if simple_pattern[int(res)] in t_a.Qf:
+        print_process(simple_string, simple_pattern, t_a)
+        print "True"
+    else:
+        print "False"
+else:
+    print "False"
