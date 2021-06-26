@@ -15,7 +15,6 @@ class TreeAutomaton:
         self.P = productions
 
 
-
 def lines(file_stream):
     for line in file_stream:
         yield line
