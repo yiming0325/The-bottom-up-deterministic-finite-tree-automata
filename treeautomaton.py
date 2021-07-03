@@ -50,85 +50,97 @@ def read(finalsymbols, productions):
     return q, qf, f, p
 
 
-arg_par = argparse.ArgumentParser(description='')
+def run():
 
-arg_par.add_argument('-f', '--finalsymbols', dest='finals', help='finalsymbols', required='True')
-arg_par.add_argument('-p', '--productions', dest='prods', help='productions', required='True')
-argse = arg_par.parse_args()
+    q, qf, f, p = read("finalsymbols.txt", "productions.txt")
 
-q, qf, f, p = read(argse.finals, argse.prods)
+    t_a = TreeAutomaton(q, qf, f, p)
 
-print ("p----",p)
-print ("qf---",qf)
-print ("q----",q)
-print ("f----",f)
+    # B( A( C(0, 1) ), C( 1, A(0) ) 
+    #input_string = "B(A(C(0,1)),C(1,A(0)))"
+    #input_string = "B(A(C(01,1)),C(1,A(01)))"
+    input_string = ""
+    for line in lines(open('input_string.txt','r')):
+        input_string = line.strip()
 
-t_a = TreeAutomaton(q, qf, f, p)
-
-
-
-# B( A( C(0, 1) ), C( 1, A(0) ) 
-input_string = "B(A(C(0,1)),C(1,A(0)))"
-#input_string = "B(A(C(01,1)),C(1,A(01)))"
-
-
-# change the leaf node
-tmp_string = ""
-item = ""
-for char in input_string:
-    if char not in [')',"(",',']:
-        item = item + char
-    else:
-        if item in t_a.P.keys():
-            tmp_string = tmp_string + t_a.P[item] + char
-            item = ""
+    # change the leaf node
+    tmp_string = ""
+    item = ""
+    for char in input_string:
+        if char not in [')',"(",',']:
+            item = item + char
         else:
-            tmp_string = tmp_string + item + char
-            item = ""
-
-print (tmp_string)
-
-simple_string, simple_pattern = simple_form(tmp_string)
-
-print ("simple_string:", simple_string)
-print ("simple_pattern:", simple_pattern)
-
-print_tree(simple_string,simple_pattern)
-
-# judge whether the input tree is accepted
-stack = Stack()
-
-for char in simple_string:
-    if(char == '('):
-        stack.push('(')
-    elif(char == ')'):
-        cur_string = ""
-        cur_string += ')'
-        while(stack.peek()!='('):
-            if(stack.peek()==','):
-                cur_string = stack.pop() + cur_string
+            if item in t_a.P.keys():
+                tmp_string = tmp_string + t_a.P[item] + char
+                item = ""
             else:
-                cur_string = simple_pattern[int(stack.pop())] + cur_string
-        cur_string = stack.pop() + cur_string
-        cur_string = simple_pattern[int(stack.pop())] + cur_string
-        if cur_string in t_a.P.keys():
-            for key,value in simple_pattern.items():
-                if(value == t_a.P[cur_string]):
-                    stack.push(str(key))
-                    break
-            
-    else:
-        print(3)
-        stack.push(char)
+                tmp_string = tmp_string + item + char
+                item = ""
 
-res = ""
-while not stack.is_empty():
-    res = stack.pop() + res
-if res != "":
-    if simple_pattern[int(res)] in t_a.Qf:
-        print_process(simple_string, simple_pattern, t_a)
-        print "True"
+
+    simple_string, simple_pattern = simple_form(tmp_string)
+
+
+    """
+    #file = open('print_dic.txt','w')
+    file = open('display.txt','w')
+    file.write("***************************************"+'\n')
+    file.close()
+    print_tree(simple_string,simple_pattern)
+    #file = open('print_dic.txt','a')
+    file = open('display.txt','w')
+    file.write("***************************************"+'\n')
+    file.close()
+    """
+
+    # judge whether the input tree is accepted
+    stack = Stack()
+
+    for char in simple_string:
+        if(char == '('):
+            stack.push('(')
+        elif(char == ')'):
+            cur_string = ""
+            cur_string += ')'
+            while(stack.peek()!='('):
+                if(stack.peek()==','):
+                    cur_string = stack.pop() + cur_string
+                else:
+                    cur_string = simple_pattern[int(stack.pop())] + cur_string
+            cur_string = stack.pop() + cur_string
+            cur_string = simple_pattern[int(stack.pop())] + cur_string
+            if cur_string in t_a.P.keys():
+                for key,value in simple_pattern.items():
+                    if(value == t_a.P[cur_string]):
+                        stack.push(str(key))
+                        break
+                
+        else:
+            stack.push(char)
+
+    res = ""
+    while not stack.is_empty():
+        res = stack.pop() + res
+    if res != "":
+        if simple_pattern[int(res)] in t_a.Qf:
+            file = open('display.txt','w')
+            file.write("True"+'\n')
+            file.write("***************************************"+'\n')
+            file.close()
+            print_tree(simple_string,simple_pattern)
+            file = open('display.txt','a')
+            file.write("***************************************"+'\n')
+            file.close()
+
+            print_process(simple_string, simple_pattern, t_a)
+            print "True"
+        else:
+            file = open('display.txt','w')
+            file.write("False"+'\n')
+            file.close()
+            print "False"
     else:
+        file = open('display.txt','w')
+        file.write("False"+'\n')
+        file.close()
         print "False"
-else:
-    print "False"
