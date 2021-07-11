@@ -3,6 +3,7 @@
 test.py
 test_ui.py
 ui_test.txt
+ui_template.py
 finalsymbols_1.txt
 productions_1.txt
 log*

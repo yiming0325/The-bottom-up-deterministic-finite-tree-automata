@@ -121,6 +121,8 @@ def run():
     res = ""
     while not stack.is_empty():
         res = stack.pop() + res
+
+    print("res:",res)
     if res != "":
         if simple_pattern[int(res)] in t_a.Qf:
             file = open('display.txt','w')
