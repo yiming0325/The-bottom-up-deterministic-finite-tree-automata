@@ -15,4 +15,4 @@ def simple_form(s):
             tmp_string = ""
         else:
             tmp_string = tmp_string + char
-    return  simple_string,s_pattern
+    return  simple_string,s_pattern,key

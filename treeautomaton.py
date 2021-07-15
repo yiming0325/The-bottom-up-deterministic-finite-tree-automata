@@ -28,11 +28,11 @@ def read(finalsymbols, productions):
         tmp = line.split("->")
 
         #F
-        for char in tmp[0].strip():
-            if char.isupper():
-                if not char in f:
-                    f.append(char)
-        
+        char = tmp[0].strip()[0]
+        if char.isalpha():
+            if not char in f:
+                f.append(char)
+         
         #Q
         if tmp[1].strip() not in q:
             q.append(tmp[1].strip())
@@ -77,8 +77,7 @@ def run():
                 tmp_string = tmp_string + item + char
                 item = ""
 
-
-    simple_string, simple_pattern = simple_form(tmp_string)
+    simple_string, simple_pattern, key = simple_form(tmp_string)
 
 
     """
@@ -110,10 +109,9 @@ def run():
             cur_string = stack.pop() + cur_string
             cur_string = simple_pattern[int(stack.pop())] + cur_string
             if cur_string in t_a.P.keys():
-                for key,value in simple_pattern.items():
-                    if(value == t_a.P[cur_string]):
-                        stack.push(str(key))
-                        break
+                stack.push(str(key))
+                simple_pattern[key] = t_a.P[cur_string]
+                key += 1
                 
         else:
             stack.push(char)

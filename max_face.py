@@ -93,7 +93,17 @@ class max_face():
 
         self.Button_7 = tk.Button(self.master, text='clear', command=self.clear_7)
 
-    # "--------------------------"
+        # "--------------------------"
+
+        # "---------Button continue-----------------"
+        self.Continue_1 = tk.Button(self.master, text='continue', command = self.continue_1)
+        self.Continue_2 = tk.Button(self.master, text='continue', command = self.continue_2)
+        self.Continue_3 = tk.Button(self.master, text='continue', command = self.continue_3)
+        self.Continue_4 = tk.Button(self.master, text='continue', command = self.continue_4)
+        self.Continue_5 = tk.Button(self.master, text='continue', command = self.continue_5)
+
+        # "--------------------------"
+
         self.create_face()
 
     def create_face(self):
@@ -106,6 +116,8 @@ class max_face():
         self.Button_1.place(x=630, y=190)
         self.Button_12.place(x=690, y=190)
 
+        self.Continue_1.place(x=735, y=190)
+
         self.label_3.place(x=820, y=190)
         self.frm_4.place(x=850, y=190)
         self.scrollbar_4.config(command=self.Text_2.yview)
@@ -113,6 +125,7 @@ class max_face():
         self.Text_2.pack(side="left")
         self.Button_2.place(x=1280, y=190)
         self.Button_11.place(x=1340, y=190)
+        self.Continue_2.place(x=1385, y=190)
         
         self.label_4.place(x=175, y=360)
         self.frm_3.place(x=200, y=360)
@@ -121,6 +134,7 @@ class max_face():
         self.Text_3.pack(side="left")
         self.Button_3.place(x=630, y=360)
         self.Button_10.place(x=690, y=360)
+        self.Continue_3.place(x=735, y=360)
         
         self.label_5.place(x=820, y=360)
         self.frm_2.place(x=850, y=360)
@@ -129,6 +143,7 @@ class max_face():
         self.Text_4.pack(side="left")
         self.Button_4.place(x=1280, y=360)
         self.Button_9.place(x=1340, y=360)
+        self.Continue_4.place(x=1385, y=360)
 
 
         self.label_6.place(x=30, y=530)
@@ -137,12 +152,14 @@ class max_face():
 
         self.Button_5.place(x=620, y=570)
         self.Button_8.place(x=680, y=570)
+        self.Continue_5.place(x=725, y=570)
 
         self.label_8.place(x=30, y=610)
         self.frm_1.place(x=200, y=635)
         self.scrollbar_1.config(command=self.Text_6.yview)
         self.scrollbar_1.pack(side='right', fill='y')
         self.Text_6.pack(side="left")
+        self.Text_6.config(state='disabled')
         self.Button_6.place(x=725, y=635)
         self.Button_7.place(x=725, y=675)
 
@@ -152,23 +169,28 @@ class max_face():
         self.frm_5.destroy()
         self.Button_1.destroy()
         self.Button_12.destroy()
+        self.Continue_1.destroy()
         self.label_3.destroy()
         self.frm_4.destroy()
         self.Button_2.destroy()
         self.Button_11.destroy()
+        self.Continue_2.destroy()
         self.label_4.destroy()
         self.frm_3.destroy()
         self.Button_3.destroy()
         self.Button_10.destroy()
+        self.Continue_3.destroy()
         self.label_5.destroy()
         self.frm_2.destroy()
         self.Button_4.destroy()
         self.Button_9.destroy()
+        self.Continue_4.destroy()
         self.label_6.destroy()
         self.label_7.destroy()
         self.Text_5.destroy()
         self.Button_5.destroy()
         self.Button_8.destroy()
+        self.Continue_5.destroy()
         self.label_8.destroy()
         self.frm_1.destroy()
         self.Button_6.destroy()
@@ -179,19 +201,31 @@ class max_face():
         tmp_string = self.Text_1.get("1.0", "end")
         print (tmp_string)
         self.Button_1.config(state='disabled', bg='black')
+        self.Text_1.config(state='disabled')
 
     def clear_12(self):
+        self.Text_1.config(state='normal')
         self.Text_1.delete('1.0','end')
         self.Button_1.config(state='normal', bg=self.defaultbg)
+
+    def continue_1(self):
+        self.Button_1.config(state='normal', bg=self.defaultbg)
+        self.Text_1.config(state='normal')
 
     def confirm_2(self):
         tmp_string = self.Text_2.get("1.0", "end")
         print (tmp_string)
         self.Button_2.config(state='disabled', bg='black')
+        self.Text_2.config(state='disabled')
 
     def clear_11(self):
+        self.Text_2.config(state='normal')
         self.Text_2.delete('1.0','end')
         self.Button_2.config(state='normal', bg=self.defaultbg)
+
+    def continue_2(self):
+        self.Button_2.config(state='normal', bg=self.defaultbg)
+        self.Text_2.config(state='normal')
 
     def confirm_3(self):
         tmp_string = self.Text_3.get("1.0", "end")
@@ -199,10 +233,16 @@ class max_face():
         file.write(tmp_string)
         file.close()
         self.Button_3.config(state='disabled', bg='black')
+        self.Text_3.config(state='disabled')
 
     def clear_10(self):
+        self.Text_3.config(state='normal')
         self.Text_3.delete('1.0','end')
         self.Button_3.config(state='normal', bg=self.defaultbg)
+
+    def continue_3(self):
+        self.Button_3.config(state='normal', bg=self.defaultbg)
+        self.Text_3.config(state='normal')
 
     def confirm_4(self):
         tmp_string_1 = self.Text_4.get("1.0", "end")
@@ -210,10 +250,16 @@ class max_face():
         file.write(tmp_string_1)
         file.close()
         self.Button_4.config(state='disabled', bg='black')
+        self.Text_4.config(state='disabled')
 
     def clear_9(self):
+        self.Text_4.config(state='normal')
         self.Text_4.delete('1.0','end')
         self.Button_4.config(state='normal', bg=self.defaultbg)
+
+    def continue_4(self):
+        self.Button_4.config(state='normal', bg=self.defaultbg)
+        self.Text_4.config(state='normal')
 
     def confirm_5(self):
         tmp_string = self.Text_5.get("1.0", "end")
@@ -221,10 +267,16 @@ class max_face():
         file.write(tmp_string)
         file.close()
         self.Button_5.config(state='disabled', bg='black')
+        self.Text_5.config(state='disabled')
 
     def clear_8(self):
+        self.Text_5.config(state='normal')
         self.Text_5.delete('1.0','end')
         self.Button_5.config(state='normal', bg=self.defaultbg)
+
+    def continue_5(self):
+        self.Button_5.config(state='normal', bg=self.defaultbg)
+        self.Text_5.config(state='normal')
 
     def lines(self,file_stream):
         for line in file_stream:
@@ -232,12 +284,16 @@ class max_face():
 
     def display(self):
         run()
+        self.Text_6.config(state='normal')
         for line in lines(open('display.txt','r')):
             self.Text_6.insert('end', line)
+        self.Text_6.config(state='disabled')
         self.Button_6.config(state='disabled', bg='black')
 
     def clear_7(self):
+        self.Text_6.config(state='normal')
         self.Text_6.delete('1.0','end')
+        self.Text_6.config(state='disabled')
         self.Button_6.config(state='normal', bg=self.defaultbg)
 
     def clear_all(self):
