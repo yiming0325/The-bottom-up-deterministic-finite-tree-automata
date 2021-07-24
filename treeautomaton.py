@@ -5,6 +5,7 @@ from simple_form  import simple_form
 from print_tree import print_tree
 from print_process import print_process
 import copy
+import normal_form 
 
 
 class TreeAutomaton:
@@ -24,20 +25,20 @@ def read(finalsymbols, productions):
     qf = [] #Qf
     f = [] #F
     p = {} #P
+
+    #F
+    for line in lines(open('operator.txt','r')):
+        f_operator = line.strip()
+        f.append(f_operator)
+
+    #Q
+    for line in lines(open('states.txt','r')):
+        tmp_state = line.strip()
+        q.append(tmp_state)
+
+    # productions
     for line in lines(open(productions)):
         tmp = line.split("->")
-
-        #F
-        char = tmp[0].strip()[0]
-        if char.isalpha():
-            if not char in f:
-                f.append(char)
-         
-        #Q
-        if tmp[1].strip() not in q:
-            q.append(tmp[1].strip())
-
-        # productions
         if tmp[0].strip() in p.keys():
             p[tmp[0].strip()].append(tmp[1].strip())
         else:
@@ -62,6 +63,16 @@ def run():
     input_string = ""
     for line in lines(open('input_string.txt','r')):
         input_string = line.strip()
+
+    # format the input string
+    sig, input_string = normal_form.run(input_string)
+
+    if not sig:
+        file = open('display.txt','w')
+        file.write("False"+'\n')
+        file.close()
+        print "False"
+        return
 
     # change the leaf node
     tmp_string = ""

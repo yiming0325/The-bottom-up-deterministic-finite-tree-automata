@@ -1,16 +1,26 @@
 Instruction
 
----------1. Create Automata-----------------
-...
-...
-...
+---------  1. Create Automata  -----------------
+# F(a ranked alphatbet)
+red
+black 
+nil
 
----------2. Simulate Automata-----------------
-...
-...
-...
+# Q(a set of states)
+qb
+qr
 
----------3. Transition graph-----------------
-...
-...
-...
+# Qf(a set of final states)
+qb
+
+# Delta(a set of Transition rules)
+nil -> qb
+black(qb,qb) -> qb
+red(qb,qb) -> qr
+
+---------  2. Simulate Automata  ---------------
+# input the string
+red(nil,black(nil,nil))
+
+---------  3. Transition graph  ----------------
+When you click the display button, the result will be displayed.

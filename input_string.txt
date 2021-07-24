@@ -1,1 +1,1 @@
-a(b(v1,v1),v2)
+black(nil,black((nil,nil)))

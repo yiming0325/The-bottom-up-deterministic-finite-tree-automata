@@ -212,7 +212,9 @@ class normal_face():
 
     def confirm_1(self):
         tmp_string = self.Text_1.get("1.0", "end")
-        print (tmp_string)
+        file = open('operator.txt','w')
+        file.write(tmp_string)
+        file.close()
         self.Button_1.config(state='disabled', bg='black')
         self.Text_1.config(state='disabled')
 
@@ -227,7 +229,9 @@ class normal_face():
 
     def confirm_2(self):
         tmp_string = self.Text_2.get("1.0", "end")
-        print (tmp_string)
+        file = open('states.txt','w')
+        file.write(tmp_string)
+        file.close()
         self.Button_2.config(state='disabled', bg='black')
         self.Text_2.config(state='disabled')
 
