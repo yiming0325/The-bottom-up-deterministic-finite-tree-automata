@@ -1,1 +1,1 @@
-black(nil,black((nil,nil)))
+B(A(C(0,1)),C(1,A(0)))

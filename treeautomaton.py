@@ -39,6 +39,8 @@ def read(finalsymbols, productions):
     # productions
     for line in lines(open(productions)):
         tmp = line.split("->")
+        if(tmp == ['\n']):
+            continue
         if tmp[0].strip() in p.keys():
             p[tmp[0].strip()].append(tmp[1].strip())
         else:

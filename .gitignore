@@ -1,6 +1,7 @@
 .vscode
 *.pyc
 test.py
+test1.py
 test_ui.py
 ui_test.txt
 ui_template.py
