@@ -64,6 +64,8 @@ def run():
     #input_string = "B(A(C(01,1)),C(1,A(01)))"
     input_string = ""
     for line in lines(open('input_string.txt','r')):
+        if line=='\n' or line=='':
+            continue
         input_string = line.strip()
 
     # format the input string

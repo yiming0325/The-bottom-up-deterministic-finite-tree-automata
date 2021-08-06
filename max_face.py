@@ -69,7 +69,7 @@ class max_face():
         self.label_7 = tk.Label(self.master, text='Input the tree:', font=('Arial', 12))
 
 
-        self.Text_5 = tk.Text(self.master, height=2, width=40)
+        self.Text_5 = tk.Entry(self.master, width=30)
 
 
         self.Button_5 = tk.Button(self.master, text='confirm', command=self.confirm_5)
@@ -266,7 +266,7 @@ class max_face():
         self.Text_4.config(state='normal')
 
     def confirm_5(self):
-        tmp_string = self.Text_5.get("1.0", "end")
+        tmp_string = self.Text_5.get()
         file = open('input_string.txt','w')
         file.write(tmp_string)
         file.close()
@@ -275,7 +275,7 @@ class max_face():
 
     def clear_8(self):
         self.Text_5.config(state='normal')
-        self.Text_5.delete('1.0','end')
+        self.Text_5.delete('0','end')
         self.Button_5.config(state='normal', bg=self.defaultbg)
 
     def continue_5(self):

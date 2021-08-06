@@ -32,7 +32,6 @@ menubar = tk.Menu(root)
 
 filemenu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='Save', command = do_job)
 filemenu.add_command(label='Clearall', command = base.clear_all)
 filemenu.add_separator()
 filemenu.add_command(label='Exit', command = root.quit)
