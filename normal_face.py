@@ -1,4 +1,5 @@
 import Tkinter as tk
+import easygui
 from treeautomaton import *
 
 
@@ -104,6 +105,14 @@ class normal_face():
         self.Continue_5 = tk.Button(self.master, text='continue', command = self.continue_5)
 
         # "--------------------------"
+        # "---------Button show-----------------"
+        self.Show_1= tk.Button(self.master, text='show', command = self.show_1)
+        self.Show_2= tk.Button(self.master, text='show', command = self.show_2)
+        self.Show_3= tk.Button(self.master, text='show', command = self.show_3)
+        self.Show_4= tk.Button(self.master, text='show', command = self.show_4)
+        self.Show_5= tk.Button(self.master, text='show', command = self.show_5)
+
+        # "--------------------------"
         self.create_face()
 
     def create_face(self):
@@ -117,6 +126,7 @@ class normal_face():
         self.Button_12.place(x=420, y=190)
 
         self.Continue_1.place(x=465, y=190)
+        self.Show_1.place(x=530, y=190)
 
         self.label_3.place(x=60, y=250)
         self.frm_4.place(x=90, y=250)
@@ -126,6 +136,7 @@ class normal_face():
         self.Button_2.place(x=360, y=250)
         self.Button_11.place(x=420, y=250)
         self.Continue_2.place(x=465, y=250)
+        self.Show_2.place(x=530, y=250)
         self.label_4.place(x=60, y=310)
         self.frm_3.place(x=90, y=310)
         self.scrollbar_3.config(command=self.Text_3.yview)
@@ -135,6 +146,7 @@ class normal_face():
         self.Button_10.place(x=420, y=310)
 
         self.Continue_3.place(x=465, y=310)
+        self.Show_3.place(x=530, y=310)
 
         self.label_5.place(x=60, y=370)
         self.frm_2.place(x=90, y=370)
@@ -145,6 +157,7 @@ class normal_face():
         self.Button_9.place(x=420, y=370)
 
         self.Continue_4.place(x=465, y=370)
+        self.Show_4.place(x=530, y=370)
 
         self.label_6.place(x=30, y=430)
         self.label_7.place(x=60, y=455)
@@ -162,6 +175,7 @@ class normal_face():
         self.Text_6.config(state='disabled')
         self.Button_6.place(x=515, y=540)
         self.Button_7.place(x=515, y=580)
+        self.Show_5.place(x=515, y=620)
 
         """
         self.master.update()
@@ -177,6 +191,7 @@ class normal_face():
         self.Button_12.destroy()
 
         self.Continue_1.destroy()
+        self.Show_1.destroy()
 
         self.label_3.destroy()
         self.frm_4.destroy()
@@ -184,6 +199,7 @@ class normal_face():
         self.Button_11.destroy()
 
         self.Continue_2.destroy()
+        self.Show_2.destroy()
 
         self.label_4.destroy()
         self.frm_3.destroy()
@@ -191,6 +207,7 @@ class normal_face():
         self.Button_10.destroy()
 
         self.Continue_3.destroy()
+        self.Show_3.destroy()
 
         self.label_5.destroy()
         self.frm_2.destroy()
@@ -198,6 +215,7 @@ class normal_face():
         self.Button_9.destroy()
 
         self.Continue_4.destroy()
+        self.Show_4.destroy()
 
         self.label_6.destroy()
         self.label_7.destroy()
@@ -209,6 +227,7 @@ class normal_face():
         self.frm_1.destroy()
         self.Button_6.destroy()
         self.Button_7.destroy()
+        self.Show_5.destroy()
 
     def confirm_1(self):
         tmp_string = self.Text_1.get("1.0", "end")
@@ -227,6 +246,12 @@ class normal_face():
         self.Button_1.config(state='normal', bg=self.defaultbg)
         self.Text_1.config(state='normal')
 
+    def show_1(self):
+        tmp = ""
+        for line in lines(open('operator.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
+
     def confirm_2(self):
         tmp_string = self.Text_2.get("1.0", "end")
         file = open('states.txt','w')
@@ -243,6 +268,12 @@ class normal_face():
     def continue_2(self):
         self.Button_2.config(state='normal', bg=self.defaultbg)
         self.Text_2.config(state='normal')
+
+    def show_2(self):
+        tmp = ""
+        for line in lines(open('states.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
 
     def confirm_3(self):
         tmp_string = self.Text_3.get("1.0", "end")
@@ -261,6 +292,12 @@ class normal_face():
         self.Button_3.config(state='normal', bg=self.defaultbg)
         self.Text_3.config(state='normal')
 
+    def show_3(self):
+        tmp = ""
+        for line in lines(open('finalsymbols.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
+
     def confirm_4(self):
         tmp_string_1 = self.Text_4.get("1.0", "end")
         file = open('productions.txt','w')
@@ -277,6 +314,12 @@ class normal_face():
     def continue_4(self):
         self.Button_4.config(state='normal', bg=self.defaultbg)
         self.Text_4.config(state='normal')
+
+    def show_4(self):
+        tmp = ""
+        for line in lines(open('productions.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
 
     def confirm_5(self):
         tmp_string = self.Text_5.get()
@@ -314,6 +357,12 @@ class normal_face():
         self.Text_6.config(state='disabled')
         self.Button_6.config(state='normal', bg=self.defaultbg)
     
+    def show_5(self):
+        tmp = ""
+        for line in lines(open('display.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
+
     def clear_all(self):
         self.clear_7()
         self.clear_8()

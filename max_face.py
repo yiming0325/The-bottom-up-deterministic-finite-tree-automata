@@ -1,4 +1,5 @@
 import Tkinter as tk
+import easygui
 from treeautomaton import *
 
 class max_face():
@@ -103,7 +104,14 @@ class max_face():
         self.Continue_5 = tk.Button(self.master, text='continue', command = self.continue_5)
 
         # "--------------------------"
+        # "---------Button show-----------------"
+        self.Show_1= tk.Button(self.master, text='show', command = self.show_1)
+        self.Show_2= tk.Button(self.master, text='show', command = self.show_2)
+        self.Show_3= tk.Button(self.master, text='show', command = self.show_3)
+        self.Show_4= tk.Button(self.master, text='show', command = self.show_4)
+        self.Show_5= tk.Button(self.master, text='show', command = self.show_5)
 
+        # "--------------------------"
         self.create_face()
 
     def create_face(self):
@@ -117,6 +125,8 @@ class max_face():
         self.Button_12.place(x=690, y=190)
 
         self.Continue_1.place(x=735, y=190)
+        self.Show_1.place(x=630, y=230)
+
 
         self.label_3.place(x=820, y=190)
         self.frm_4.place(x=850, y=190)
@@ -126,6 +136,7 @@ class max_face():
         self.Button_2.place(x=1280, y=190)
         self.Button_11.place(x=1340, y=190)
         self.Continue_2.place(x=1385, y=190)
+        self.Show_2.place(x=1280, y=230)
         
         self.label_4.place(x=175, y=360)
         self.frm_3.place(x=200, y=360)
@@ -135,6 +146,7 @@ class max_face():
         self.Button_3.place(x=630, y=360)
         self.Button_10.place(x=690, y=360)
         self.Continue_3.place(x=735, y=360)
+        self.Show_3.place(x=630, y=400)
         
         self.label_5.place(x=820, y=360)
         self.frm_2.place(x=850, y=360)
@@ -144,6 +156,7 @@ class max_face():
         self.Button_4.place(x=1280, y=360)
         self.Button_9.place(x=1340, y=360)
         self.Continue_4.place(x=1385, y=360)
+        self.Show_4.place(x=1280, y=400)
 
 
         self.label_6.place(x=30, y=530)
@@ -162,6 +175,7 @@ class max_face():
         self.Text_6.config(state='disabled')
         self.Button_6.place(x=725, y=635)
         self.Button_7.place(x=725, y=675)
+        self.Show_5.place(x=725, y=715)
 
     def destroy(self):
         self.label_1.destroy()
@@ -170,21 +184,25 @@ class max_face():
         self.Button_1.destroy()
         self.Button_12.destroy()
         self.Continue_1.destroy()
+        self.Show_1.destroy()
         self.label_3.destroy()
         self.frm_4.destroy()
         self.Button_2.destroy()
         self.Button_11.destroy()
         self.Continue_2.destroy()
+        self.Show_2.destroy()
         self.label_4.destroy()
         self.frm_3.destroy()
         self.Button_3.destroy()
         self.Button_10.destroy()
         self.Continue_3.destroy()
+        self.Show_3.destroy()
         self.label_5.destroy()
         self.frm_2.destroy()
         self.Button_4.destroy()
         self.Button_9.destroy()
         self.Continue_4.destroy()
+        self.Show_4.destroy()
         self.label_6.destroy()
         self.label_7.destroy()
         self.Text_5.destroy()
@@ -195,6 +213,7 @@ class max_face():
         self.frm_1.destroy()
         self.Button_6.destroy()
         self.Button_7.destroy()
+        self.Show_5.destroy()
 
 
     def confirm_1(self):
@@ -214,6 +233,12 @@ class max_face():
         self.Button_1.config(state='normal', bg=self.defaultbg)
         self.Text_1.config(state='normal')
 
+    def show_1(self):
+        tmp = ""
+        for line in lines(open('operator.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
+
     def confirm_2(self):
         tmp_string = self.Text_2.get("1.0", "end")
         file = open('states.txt','w')
@@ -230,6 +255,12 @@ class max_face():
     def continue_2(self):
         self.Button_2.config(state='normal', bg=self.defaultbg)
         self.Text_2.config(state='normal')
+
+    def show_2(self):
+        tmp = ""
+        for line in lines(open('states.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
 
     def confirm_3(self):
         tmp_string = self.Text_3.get("1.0", "end")
@@ -248,6 +279,12 @@ class max_face():
         self.Button_3.config(state='normal', bg=self.defaultbg)
         self.Text_3.config(state='normal')
 
+    def show_3(self):
+        tmp = ""
+        for line in lines(open('finalsymbols.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
+
     def confirm_4(self):
         tmp_string_1 = self.Text_4.get("1.0", "end")
         file = open('productions.txt','w')
@@ -264,6 +301,12 @@ class max_face():
     def continue_4(self):
         self.Button_4.config(state='normal', bg=self.defaultbg)
         self.Text_4.config(state='normal')
+
+    def show_4(self):
+        tmp = ""
+        for line in lines(open('productions.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
 
     def confirm_5(self):
         tmp_string = self.Text_5.get()
@@ -293,6 +336,12 @@ class max_face():
             self.Text_6.insert('end', line)
         self.Text_6.config(state='disabled')
         self.Button_6.config(state='disabled', bg='black')
+
+    def show_5(self):
+        tmp = ""
+        for line in lines(open('display.txt','r')):
+            tmp = tmp+line 
+        easygui.msgbox(tmp)
 
     def clear_7(self):
         self.Text_6.config(state='normal')
