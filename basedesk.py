@@ -14,7 +14,7 @@ class basedesk():
         self.image = self.canvas.create_image(0, 0, anchor='nw', image=self.image_file)
         self.create_base()
 
-        self.face= max_face(self.root)
+        self.face= normal_face(self.root)
 
     def create_base(self):
         self.canvas.pack(side='top')

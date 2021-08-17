@@ -6,6 +6,7 @@ import easygui
 from basedesk import basedesk
 from normal_face import normal_face
 from max_face import max_face
+import sys
 
 
 
@@ -28,13 +29,16 @@ def max_change():
 def normal_change():
     base.normal_change()
 
+def window_exit():
+    sys.exit(0)
+
 menubar = tk.Menu(root)
 
 filemenu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='File', menu=filemenu)
 filemenu.add_command(label='Clearall', command = base.clear_all)
 filemenu.add_separator()
-filemenu.add_command(label='Exit', command = root.quit)
+filemenu.add_command(label='Exit', command = window_exit)
 
 windowmenu = tk.Menu(menubar, tearoff = 0)
 menubar.add_cascade(label='Window', menu = windowmenu)
@@ -45,6 +49,7 @@ helpmenu = tk.Menu(menubar, tearoff = 0)
 menubar.add_cascade(label='Help', menu = helpmenu)
 helpmenu.add_command(label='Info', command = info)
 
+root.protocol("WM_DELETE_WINDOW", window_exit)
 root.config(menu=menubar)
 
 root.mainloop()
