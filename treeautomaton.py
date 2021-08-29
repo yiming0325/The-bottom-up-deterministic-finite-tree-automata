@@ -95,17 +95,6 @@ def run():
     simple_string, simple_pattern, key = simple_form(tmp_string)
 
 
-    """
-    #file = open('print_dic.txt','w')
-    file = open('display.txt','w')
-    file.write("***************************************"+'\n')
-    file.close()
-    print_tree(simple_string,simple_pattern)
-    #file = open('print_dic.txt','a')
-    file = open('display.txt','w')
-    file.write("***************************************"+'\n')
-    file.close()
-    """
 
     # judge whether the input tree is accepted
     stack = Stack()

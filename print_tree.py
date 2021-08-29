@@ -43,18 +43,14 @@ def to_dct(s):
     return dct_test
 
 # Print out the tree according to the dictionary
+# This method is referenced in: https://stackoverflow.com/questions/1649027/how-do-i-print-out-a-tree-structure
 def ptree(parent, tree, s, pattern, indent=''):
-    #print ("s:",s)
     if parent != -1:
         if int(s[parent]) in pattern.keys():
-            # print(pattern[int(s[parent])])
-            # file = open('print_dic.txt','a')
             file = open('display.txt','a')
             file.write(pattern[int(s[parent])]+'\n')
             file.close()
         else:
-            # print(s[parent])
-            # file = open('print_dic.txt','a')
             file = open('display.txt','a')
             file.write(s[parent]+'\n')
             file.close()
@@ -64,15 +60,11 @@ def ptree(parent, tree, s, pattern, indent=''):
             if parent >= 10 else 1
     indent += ' ' * int(shift)
     for child in tree[parent][:-1]:
-        # print(indent + '|' + '-' * 4, end='')
-        # file = open('print_dic.txt','a')
         file = open('display.txt','a')
         file.write(indent + '|' + '-' * 4)
         file.close()
         ptree(child, tree, s, pattern, indent + '|' + ' ' * 4)
     child = tree[parent][-1]
-    # print(indent + '`' + '-' * 4, end='')
-    #file = open('print_dic.txt','a')
     file = open('display.txt','a')
     file.write(indent + '`' + '-' * 4)
     file.close()

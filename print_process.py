@@ -34,7 +34,6 @@ def print_process(simple_string, simple_pattern, t_a):
                     tmp = stack_tmp.pop()
                     tmp_string = tmp + tmp_string
                 print_tree(tmp_string,simple_pattern)
-                # file = open('print_dic.txt','a')
                 file = open('display.txt','a')
                 file.write("***************************************"+'\n')
                 file.close()

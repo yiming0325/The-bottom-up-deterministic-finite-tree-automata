@@ -40,10 +40,6 @@ def remove_space(s):
     return tmp_string
 
 
-#res = check_brackets(input_string)
-#res = check_symbols(input_string)
-#res = remove_space(input_string)
-#print(res)
 
 def run(s):
     s = remove_space(s)
