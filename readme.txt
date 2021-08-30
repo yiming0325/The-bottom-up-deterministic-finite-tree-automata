@@ -22,5 +22,7 @@ The idea of a stack is used in the algorithm, but there is no stack data structu
 treeautomaton.py
 The main function is in it
 
+Run under windows 10 environment, the compiler version is python2.7. The third-party library easygui needs to be installed before running, and the main page can appear by running the ui.py file.
+
 How to run it?
-D:\desktop\The bottom up deterministic finite tree automata>c:/Python27/python.exe "d:/desktop/The bottom up deterministic finite tree automata/treeautomaton.py" -f finalsymbols.txt -p productions.txt
+D:\desktop\The bottom up deterministic finite tree automata>c:/Python27/python.exe "d:/desktop/The bottom up deterministic finite tree automata/ui.py"
